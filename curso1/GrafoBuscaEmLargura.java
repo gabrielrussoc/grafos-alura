@@ -1,3 +1,5 @@
+package curso1;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -52,6 +54,7 @@ public class GrafoBuscaEmLargura {
         return dist[t];
     }
 
+    /* A complexidade desse método também depende da representação. O(V^2) para matrizes e O(V+A) para listas. */
     private void buscaEmLargura(int s, int[] dist) {
         Queue<Integer> fila = new LinkedList<>();
         fila.add(s);

@@ -1,16 +1,32 @@
+package curso1;
+
 /**
- * Digrafo representado com matriz de adjacência
- * Essencialmente igual a um grafo, mas agora as arestas tem direções.
+ * Digrafo representado com matriz de adjacência.
+ * - Não confundir a pronúncia de Digrafo e Dígrafo.
+ *
+ * Muito semelhante a um grafo, mas agora as arestas tem direções.
  * Uma aresta direciona também é chamada de arco.
- * Alguns autores definem pelo outro lado: uma aresta é um par de arcos anti-simétricos (um vai outro volta).
- * Pode ser útil pensar que um grafo é um tipo especial de digrafo.
+ *
+ * Alguns autores definem pelo outro lado: uma aresta é um par de arcos anti-simétricos (um vai e outro volta).
+ * Dito isso, pode ser útil pensar que um grafo é um tipo especial de digrafo.
  */
 public class Digrafo {
 	private final int V;
 	private int A;
 	private boolean adj[][];
 
-	/* Agora temos grau de entrada e saída. O conceito só de grau não faz mais sentido */
+	/* O conceito só de grau não faz mais sentido.
+	 * Agora temos grau de entrada e saída.
+	 * Grau de entrada := número de arcos entrando no vértice
+	 * Grau de saída := número de arcos saindo do vértice
+	 *
+	 * A->B
+	 *
+	 * gIn[A] = 0;
+	 * gOut[A] = 1;
+	 * gIn[B] = 0;
+	 * gIn[B] = 1;
+	 * */
 	private int gIn[], gOut[];
 
 	public Digrafo(int V) {
@@ -24,9 +40,9 @@ public class Digrafo {
 	public void adicionaArco(int u, int v) {
 		if(!adj[u][v]) {
 			A++;
-			gOut[u]++;
+			gOut[u]++; /* Aqui self-loops estão bem definidos */
 			gIn[v]++;
-			adj[u][v] = true; /* Veja que não fazemos nas duas direções */
+			adj[u][v] = true; /* Veja que não fazemos mais nas duas direções */
 		}
 	}
 	
@@ -35,7 +51,7 @@ public class Digrafo {
 			A--;
 			gOut[u]--;
 			gIn[v]--;
-			adj[u][v] = false; /* Veja que não fazemos nas duas direções */
+			adj[u][v] = false;
 		}
 	}
 

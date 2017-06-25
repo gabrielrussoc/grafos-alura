@@ -1,3 +1,5 @@
+package curso1;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -86,18 +88,37 @@ public class GrafoBuscaEmProfundidade {
         return vis[v];
     }
 
+    /* Esse aqui seria o código final da Busca em Profundidade. Ela tem diversos detalhes complexos para um iniciante.
+     * Por ora, é importante falar de complexidade.
+     *
+     * A complexidade desse método é O(V^2) pois estamos trabalhando com matrizes de adjacência.
+     * Num grafo esparso, com 1 milhão de vértices e 5 milhões de arestas, esse método é inviável.
+     *
+     * Na representação de listas, a complexidade fica O(V+A). Apesar de A poder ser tão grande quanto V^2 em grafos densos,
+     * no exemplo esparso a diferença é gritante. Um jeito de pensar é que cada vértice é visitado apenas uma vez e nós olhamos
+     * para cada aresta apenas duas vezes. */
     private void temCaminho_v3(int u, boolean[] vis) {
         vis[u] = true;
         for(int v = 0; v < V; v++) {
             if(adj[u][v] && !vis[v])
                 temCaminho_v3(v, vis);
         }
+        /* Versão para listas:
+         * vis[u] = true;
+         * for(int v : adj.get(u)) {
+         *     if(!vis[v]) {
+         *         temCaminho_v3(v, vis);
+         *     }
+         * }
+         * */
+
     }
 
 
     /**
      * Construção do caminho. A ideia é guardar o vértice que "descobriu" cada vértice na busca.
      * IMPORTANTE: O tamanho do caminho é medido pelo numero de ARESTAS.
+     * IMPORTANTE: Um caminho NAO repete vértices nem arestas.
      */
     public List<Integer> getCaminho(int s, int t) {
         int ant[] = new int[V];
